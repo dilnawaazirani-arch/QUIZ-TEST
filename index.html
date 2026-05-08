@@ -618,7 +618,7 @@
                             <div class="stat-label">Correct Answers</div>
                         </div>
                     </div>
-                    <button class="restart-button" onclick="restartTest()">Retake Test</button>
+                    <button class="restart-button" onclick="finishTest()">Finish Test</button>
                 </div>
             `;
 
@@ -636,13 +636,18 @@
 
         // Initialize test on page load
         initializeTest();
-    </script>
-    <script>
+        function finishTest() {
+    // 1. Send the signal to Yo Scenario
     window.parent.postMessage({
-            type: 'setVariable',
-            name: 'quiz_complete',
-            value: true
-        }, '*');
-</script>
+        type: 'setVariable',
+        name: 'quiz_complete',
+        value: true
+    }, '*');
+
+    // 2. Give the user a clear message
+    alert("Test submitted successfully! Please click the button below the quiz to continue.");
+}
+    </script>
+ 
 </body>
 </html>
