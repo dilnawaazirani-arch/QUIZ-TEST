@@ -637,13 +637,11 @@
         // Initialize test on page load
         initializeTest();
     </script>
-    <script>
-    // This tells Yo Scenario the quiz is finished
     window.parent.postMessage({
-        type: 'setVariable',
-        name: 'quiz_complete',
-        value: true
-    }, '*');
+            type: 'setVariable',
+            name: 'quiz_complete',
+            value: true
+        }, '*');
 </script>
 </body>
 </html>
