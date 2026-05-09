@@ -639,13 +639,19 @@
         function finishTest() {
     // 1. Send the signal to Yo Scenario
     window.parent.postMessage({
+       function finishTest() {
+    // We specify 'https://app.yoscenario.com' to ensure the message is delivered
+    window.parent.postMessage({
         type: 'setVariable',
         name: 'quizcomplete',
         value: true
-    }, '*');
+    }, 'https://app.yoscenario.com');
+
+    alert("Test submitted! Checking progress...");
+}
 
     // 2. Give the user a clear message
-    alert("Test submitted successfully! Please click the button below the quiz to continue.");
+    alert("Test submitted successfully! Please click the Next button to continue.");
 }
     </script>
  
