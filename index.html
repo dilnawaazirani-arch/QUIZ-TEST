@@ -641,10 +641,10 @@ initializeTest();
 function finishTest() {
     try {
         window.parent.postMessage({
-            type: 'setVariable',
-            name: 'quizcomplete', // Ensure this matches Yo Scenario exactly
-            value: true
-        }, '*');
+    type: 'setVariable',
+    name: 'test', // Double check this matches Yo Scenario!
+    value: true
+}, '*');
         alert("Progress Sent! Please click the Next button.");
     } catch (err) {
         console.error("Message failed:", err);
