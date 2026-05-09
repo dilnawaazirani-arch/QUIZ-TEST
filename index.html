@@ -625,32 +625,41 @@
             resultsContainer.classList.remove('hidden');
         }
 
-     function restartTest() {
-    currentQuestion = 0;
-    score = 0;
-    answered = false;
-    document.getElementById('testContent').classList.remove('hidden');
-    document.getElementById('resultsContainer').classList.add('hidden');
-    renderQuestion();
-}
+    function restartTest() {
+            currentQuestion = 0;
+            score = 0;
+            answered = false;
+            document.getElementById('testContent').classList.remove('hidden');
+            document.getElementById('resultsContainer').classList.add('hidden');
+            renderQuestion();
+        }
 
-// Initialize test on page load
-initializeTest();
+        // Initialize test on page load
+        initializeTest();
 
-// THIS IS THE FIX: We removed the extra "}" that was above this line
-function finishTest() {
-    try {
-        window.parent.postMessage({
-    type: 'setVariable',
-    name: 'test', // Double check this matches Yo Scenario!
-    value: true
-}, '*');
-        alert("Progress Sent! Please click the Next button.");
-    } catch (err) {
-        console.error("Message failed:", err);
-    }
-} // Added this missing bracket to close the function
+        function finishTest() {
+            console.log("Attempting handshake...");
+            
+            // 1. Define the message
+            // IMPORTANT: Ensure the name 'quizcomplete' matches Yo Scenario exactly
+            const payload = {
+                type: 'setVariable',
+                name: 'quizcomplete', 
+                value: true
+            };
+
+            try {
+                // 2. Send as a standard object
+                window.parent.postMessage(payload, '*');
+                
+                // 3. Send as a STRING (This fixes most handshake failures)
+                window.parent.postMessage(JSON.stringify(payload), '*');
+                
+                alert("Progress Sent! You can now click 'Continue' in the training.");
+            } catch (err) {
+                console.error("Handshake failed:", err);
+            }
+        }
     </script>
- 
 </body>
 </html>
