@@ -625,31 +625,31 @@
             resultsContainer.classList.remove('hidden');
         }
 
-        function restartTest() {
-            currentQuestion = 0;
-            score = 0;
-            answered = false;
-            document.getElementById('testContent').classList.remove('hidden');
-            document.getElementById('resultsContainer').classList.add('hidden');
-            renderQuestion();
-        }
+     function restartTest() {
+    currentQuestion = 0;
+    score = 0;
+    answered = false;
+    document.getElementById('testContent').classList.remove('hidden');
+    document.getElementById('resultsContainer').classList.add('hidden');
+    renderQuestion();
+}
 
-        // Initialize test on page load
-        initializeTest();
-        } // Safety bracket to close any accidentally open functions above
+// Initialize test on page load
+initializeTest();
 
+// THIS IS THE FIX: We removed the extra "}" that was above this line
 function finishTest() {
     try {
         window.parent.postMessage({
             type: 'setVariable',
-            name: 'quizcomplete',
+            name: 'quizcomplete', // Ensure this matches Yo Scenario exactly
             value: true
         }, '*');
         alert("Progress Sent! Please click the Next button.");
     } catch (err) {
         console.error("Message failed:", err);
     }
-}
+} // Added this missing bracket to close the function
     </script>
  
 </body>
