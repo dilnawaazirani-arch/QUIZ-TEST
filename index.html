@@ -636,22 +636,19 @@
 
         // Initialize test on page load
         initializeTest();
-        function finishTest() {
-    // 1. Send the signal to Yo Scenario
-    window.parent.postMessage({
-       function finishTest() {
-    // We specify 'https://app.yoscenario.com' to ensure the message is delivered
-    window.parent.postMessage({
-        type: 'setVariable',
-        name: 'quizcomplete',
-        value: true
-    }, 'https://app.yoscenario.com');
+        } // Safety bracket to close any accidentally open functions above
 
-    alert("Test submitted! Checking progress...");
-}
-
-    // 2. Give the user a clear message
-    alert("Test submitted successfully! Please click the Next button to continue.");
+function finishTest() {
+    try {
+        window.parent.postMessage({
+            type: 'setVariable',
+            name: 'quizcomplete',
+            value: true
+        }, '*');
+        alert("Progress Sent! Please click the Next button.");
+    } catch (err) {
+        console.error("Message failed:", err);
+    }
 }
     </script>
  
